@@ -24,6 +24,11 @@ fn show_char_code(c : char){
         let code_tmp = c;
         code_tmp as u32
     };
+
+    let x = {
+        let ss = 3;
+        println!("{ss}");
+    };
     //println!("char code of '{}' is {}(0x{:x})", c,code,code);
     println!("char code of '{}' is {code}(0x{code:x})", c);
 }
