@@ -9,8 +9,17 @@ fn main() {
     //const y:u8=50;//変数と定数でシャドイングを使うことは不可
     println!("Hello, world!");
     func(x, y);
+
+    fun_tpl2((32,256,65539));
 }
 
 fn func(x : u8, y : u8){
     println!("x={}, y={}",x,y);
+}
+
+fn fun_tpl(x : (u8, u16, u32)){
+    println!("({},{},{})",x.0, x.1, x.2);
+}
+fn fun_tpl2((x,y,z) : (u8, u16, u32)){
+    println!("({},{},{})",x,y,z);
 }
