@@ -19,7 +19,11 @@ fn func(x : u8, y : u8){
     println!("x={}, y={}",x,y);
 }
 fn show_char_code(c : char){
-    let code = c as u32;
+    //let code = c as u32;
+    let code = {
+        let code_tmp = c;
+        code_tmp as u32
+    };
     //println!("char code of '{}' is {}(0x{:x})", c,code,code);
     println!("char code of '{}' is {code}(0x{code:x})", c);
 }
