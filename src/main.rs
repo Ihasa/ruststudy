@@ -20,10 +20,11 @@ fn func(x : u8, y : u8){
 }
 fn show_char_code(c : char){
     //let code = c as u32;
-    let code = {
+    /*let code = {
         let code_tmp = c;
         code_tmp as u32
-    };
+    };*/
+    let code = get_char_code(c);
 
     let x = {
         let ss = 3;
@@ -31,6 +32,9 @@ fn show_char_code(c : char){
     };
     //println!("char code of '{}' is {}(0x{:x})", c,code,code);
     println!("char code of '{}' is {code}(0x{code:x})", c);
+}
+fn get_char_code(c : char) -> u32 {
+    c as u32 //return c as u32;と同義
 }
 fn fun_tpl(x : (u8, u16, u32)){
     println!("({},{},{})",x.0, x.1, x.2);
