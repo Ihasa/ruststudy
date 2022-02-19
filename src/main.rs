@@ -18,6 +18,8 @@ fn main() {
     println!("{} is even : {}", num, is_even(num));
 
     looping();
+
+    recur(0);
 }
 
 fn func(x : u8, y : u8){
@@ -83,5 +85,10 @@ fn looping(){
     for iter in 0..10 {
         println!("{}...",iter);
     }
-
+}
+fn recur(x : u8){
+    if x < 10{
+        println!("{}...", x);
+        recur(x+1);
+    }
 }
