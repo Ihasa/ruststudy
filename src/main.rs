@@ -20,6 +20,8 @@ fn main() {
     looping();
 
     recur(0);
+
+    is3n(5);
 }
 
 fn func(x : u8, y : u8){
@@ -90,5 +92,13 @@ fn recur(x : u8){
     if x < 10{
         println!("{}...", x);
         recur(x+1);
+    }
+}
+fn is3n(x : u32){
+    match x%3 {
+        0 => {println!("0");},
+        1 => {println!("1");},
+        2 => {println!("2");},
+        _ => (),
     }
 }
