@@ -78,4 +78,10 @@ fn looping(){
     //
     //}
 
+    //for文(=foreach)のほうが優秀
+    //0..10はRange型インスタンス、メソッド呼びたい場合は()つける
+    for iter in 0..10 {
+        println!("{}...",iter);
+    }
+
 }
