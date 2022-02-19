@@ -22,6 +22,11 @@ fn main() {
     recur(0);
 
     is3n(5);
+
+    let num = 7;
+    println!("is5n({})={}",num,is5n(num));
+    let num = Some(8);
+    println!("is5n({:?})={}",num,is5n_some(num));
 }
 
 fn func(x : u8, y : u8){
@@ -101,4 +106,52 @@ fn is3n(x : u32){
         2 => {println!("2");},
         _ => (),
     }
+}
+fn is5n(x : u32) -> bool{
+    // if(x % 5 == 0){
+    //     true
+    // } else {
+    //     false
+    // }
+
+    // match x % 5{
+    //     0 => true,
+    //     _ => false,
+    // }
+
+    //ただの数値型だと恩恵あんまりないかも
+    if let 0 = x % 5{
+        true
+    } else {
+        false
+    }
+}
+
+fn is5n_some(x : Option<u32>) -> bool{
+    // if(x.expect("") % 5 == 0){
+    //     true
+    // } else {
+    //     false
+    // }
+
+    // match x{
+    //     Some(n) => n % 5 == 0,
+    //     _ => false,
+    // }
+
+    //xそのものが何かと一致したときだけ処理をしたい場合にif letが有効
+    //種類の多いenum型のときに効果を発揮する
+    if let Some(n) = x { 
+    //if let x = Some(n) { //これはエラー　順番気を付ける
+        n % 5 == 0
+    } else { //このelseを書かないとエラー
+        false
+    }
+
+    // if let 0 = x.expect("") % 5 { //いまいちコード 今回の場合はmatchが一番いい気がする
+    //     true
+    // } else {
+    //     false   
+    // }
+    
 }
