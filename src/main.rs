@@ -42,12 +42,19 @@ fn get_char_code(c : char) -> u32 {
 fn is_even(x : u32) -> bool{
     let rem = x % 2;
     //let result = false;
-    let mut result = false;
-    if rem == 0{
-        /*let*/ result = true; //resultをif式の中でシャドイングしてもスコープがブロック内でしか有効でないからダメ
+    //let mut result = false;
+    // if rem == 0{
+    //     /*let*/ result = true; //resultをif式の中でシャドイングしてもスコープがブロック内でしか有効でないからダメ
+    // } else {
+    //     /*let*/ result = false;
+    // }
+
+    //if"式"なのでこれでいい
+    let result = if rem == 0 {
+        true
     } else {
-        /*let*/ result = false;
-    }
+        false
+    };
     result
 }
 fn fun_tpl(x : (u8, u16, u32)){
