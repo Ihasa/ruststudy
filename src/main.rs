@@ -16,6 +16,8 @@ fn main() {
     
     let num = 4;
     println!("{} is even : {}", num, is_even(num));
+
+    looping();
 }
 
 fn func(x : u8, y : u8){
@@ -62,4 +64,18 @@ fn fun_tpl(x : (u8, u16, u32)){
 }
 fn fun_tpl2((x,y,z) : (u8, u16, u32)){
     println!("({},{},{})",x,y,z);
+}
+fn looping(){
+    let mut n = 0;
+    while n < 10 {
+        println!("{}...",n);
+        //n++; //Rustには無い
+        n += 1;
+    }
+
+    //これでwhile(true){処理}と同義
+    //loop() {
+    //
+    //}
+
 }
