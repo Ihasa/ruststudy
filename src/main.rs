@@ -13,6 +13,9 @@ fn main() {
     fun_tpl2((32,256,65539));
 
     show_char_code('0');
+    
+    let num = 4;
+    println!("{} is even : {}", num, is_even(num));
 }
 
 fn func(x : u8, y : u8){
@@ -35,6 +38,17 @@ fn show_char_code(c : char){
 }
 fn get_char_code(c : char) -> u32 {
     c as u32 //return c as u32;と同義
+}
+fn is_even(x : u32) -> bool{
+    let rem = x % 2;
+    //let result = false;
+    let mut result = false;
+    if rem == 0{
+        /*let*/ result = true; //resultをif式の中でシャドイングしてもスコープがブロック内でしか有効でないからダメ
+    } else {
+        /*let*/ result = false;
+    }
+    result
 }
 fn fun_tpl(x : (u8, u16, u32)){
     println!("({},{},{})",x.0, x.1, x.2);
