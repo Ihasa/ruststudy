@@ -1,3 +1,7 @@
+mod vec;
+
+use vec::Vec2;
+
 fn main() {
     let x:u8 = 6;
     let mut x = x * 2;
@@ -27,6 +31,14 @@ fn main() {
     println!("is5n({})={}",num,is5n(num));
     let num = Some(8);
     println!("is5n({:?})={}",num,is5n_some(num));
+
+    let x = 30;
+    let y = 4;
+    let mut v = Vec2{
+        x, //初期化に使う変数名 = フィールド名の時に許される省略記法
+        y,
+    };
+    v.x = 32;
 }
 
 fn func(x : u8, y : u8){
