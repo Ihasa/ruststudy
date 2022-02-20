@@ -2,6 +2,7 @@ mod vec;
 
 use vec::Vec2;
 use vec::Vec3;
+use vec::IpAddrKind;
 
 fn main() {
     let x:u8 = 6;
@@ -50,6 +51,11 @@ fn main() {
 
     let v3 = Vec3(3, 4, 5); //タプル構造体はタプルと同じように初期化・使用
     println!("{},{},{}", v3.0,v3.1,v3.2);
+
+    let ip4 = IpAddrKind::V4(192,2,0,0);
+    let ip6 = IpAddrKind::V6(String::from("::1"));
+    ip4.print_addr();
+    ip6.print_addr();
 }
 
 fn func(x : u8, y : u8){

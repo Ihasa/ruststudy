@@ -24,3 +24,24 @@ impl Vec2 {
 }
 
 pub struct Vec3(pub u32,pub u32,pub u32); //タプル構造体 フィールド名つけるまでもないような場合に使う タプルと同じ使い方が可能
+
+#[derive(Debug)]
+pub enum IpAddrKind{
+    V4(u8, u8, u8, u8), //enumといいつつデータを持てる
+    V6(String)
+}
+
+impl IpAddrKind{        //enumといいつつメソッド定義できる
+    pub fn print_addr(&self){
+        println!("{:?}",self);
+        match(self){
+            IpAddrKind::V4(n1,n2,n3,n4) => println!("{}.{}.{}.{}", n1,n2,n3,n4),
+            IpAddrKind::V6(s) => println!("{}",s),
+        }
+    }
+}
+
+enum Vec2_3{        //こうすればInterface的に使えそう
+    V2(Vec2),
+    V3(Vec3)
+}
