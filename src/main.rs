@@ -63,7 +63,7 @@ fn main() {
 fn print_string(){
     //文字列リテラルとString型
     //str,str2とも可変化可能
-    let mut str = "hello.";
+    let str = "hello.";
     let mut str2 = String::from("hello..."); //この時点でメモリ確保が行われている。String str = new String("...");相当
     //str.push_str("world."); //実はString型じゃない
     str2.push_str("world.");
@@ -82,10 +82,36 @@ fn print_string(){
 
     println!("{},{}", str3, str4);
 
+    let str5 = String::from("apple");
+    let some_num = 10;
+    
+    func_str(str5, some_num);
+    //StringはDrop実装なので関数に渡しても所有権が移動する
+    //u32はCopyトレイト実装なので、所有権は移動しない
+
+    let str6 = String::from("lemon");
+    let str7 = id_str(str6);//str6がid_str関数にムーブ→戻り値が呼び出し元にムーブ
+    let str8 = create_str();
+    //println!("{}",str5); //エラー。無効な変数を使った
+    println!("{}",str7); //関数によって移動された所有権を使う
+    println!("{}",str8); //関数によって移動された所有権を使う
+    println!("{}",some_num); //所有権は移動しないので有効なまま
+
 }//スコープを抜けたら、確保されたメモリが直ちに解放される。drop関数が自動で呼ばれる。free();に相当
 //C++でRAIIパターンとして結構有名
 
+fn func_str(s : String, x : u32){
+    //所有権が移った側で使うならよい
+    println!("{}", s);
+}//sはdropされる
 
+fn id_str(s : String) -> String{
+    s
+}//返り値なので呼び出し元へムーブされる
+
+fn create_str() -> String{
+    String::from("yes/no")
+}//返り値なので呼び出し元へムーブされる
 
 fn func(x : u8, y : u8){
     println!("x={}, y={}",x,y);
