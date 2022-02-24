@@ -56,7 +56,36 @@ fn main() {
     let ip6 = IpAddrKind::V6(String::from("::1"));
     ip4.print_addr();
     ip6.print_addr();
+
+    print_string();
 }
+
+fn print_string(){
+    //文字列リテラルとString型
+    //str,str2とも可変化可能
+    let mut str = "hello.";
+    let mut str2 = String::from("hello..."); //この時点でメモリ確保が行われている。String str = new String("...");相当
+    //str.push_str("world."); //実はString型じゃない
+    str2.push_str("world.");
+    
+    println!("{:?}, {:?}",str,str2);
+
+    let str3 = String::from("yellow.");
+    //let str4 = str3; //こうすると、str3はもう有効な変数でないと判定される。以降は使えない
+    //スタックに積む型に対してはCopyトレイトを実装できて、暗黙のうちに深いコピーを作れる
+    //言い換えると深いコピーも浅いコピーも違いがないようなもの
+    //Dropトレイトを実装しているような型にはCopyトレイトを実装できない(コンパイラがチェックする)
+    //明示的に深いコピーが欲しければcloneする
+    let mut str4 = str3.clone();
+
+    str4.push_str("red.");
+
+    println!("{},{}", str3, str4);
+
+}//スコープを抜けたら、確保されたメモリが直ちに解放される。drop関数が自動で呼ばれる。free();に相当
+//C++でRAIIパターンとして結構有名
+
+
 
 fn func(x : u8, y : u8){
     println!("x={}, y={}",x,y);
