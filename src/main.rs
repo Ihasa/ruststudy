@@ -97,6 +97,30 @@ fn print_string(){
     println!("{}",str8); //関数によって移動された所有権を使う
     println!("{}",some_num); //所有権は移動しないので有効なまま
 
+    println!("Length of {} is {}", str7, str_length(&str7)); //参照渡し。Readonly
+
+    let mut str9 = String::from("world");
+    add_hello(&mut str9);
+    add_hello(&mut str9);
+    add_hello(&mut str9);//add_helloを何回呼んでも、str9の可変参照を利用するのは常に1つだけ
+    println!("{}",str9);
+
+    let r_str9_1 = &mut str9;
+    //let r_str9_2 = &mut str9;//2つの可変参照が同時に使われるとエラー
+    //同時に可変・不変両方で参照もできない
+    println!("{},", r_str9_1);
+
+    let mut str10 = String::from("grape");
+    {//r_str10_1はこのカッコのスコープしかない
+        let r_str10_1 = &mut str10;
+        add_hello(r_str10_1);
+        r_str10_1.push_str("tree");
+        println!("{}",r_str10_1);
+    }
+    let r_str10_2 = &mut str10;
+    r_str10_2.push_str("house");
+    println!("{}",r_str10_2);
+
 }//スコープを抜けたら、確保されたメモリが直ちに解放される。drop関数が自動で呼ばれる。free();に相当
 //C++でRAIIパターンとして結構有名
 
@@ -109,9 +133,27 @@ fn id_str(s : String) -> String{
     s
 }//返り値なので呼び出し元へムーブされる
 
+//文字列の長さを返す関数
+//Stringオブジェクトへの参照を取る(借用する)ので所有権を奪わない
+fn str_length(s : &String) -> usize {
+    s.len()
+}//sは参照なので所有権持ってない　dropは呼ばれない
+
+fn add_hello(s : &mut String){
+    s.push_str("hello");
+}
+
 fn create_str() -> String{
     String::from("yes/no")
 }//返り値なので呼び出し元へムーブされる
+
+//fn create_str2() -> &String{
+fn create_str2() -> String{
+    let s = String::from("yes/no/cancel");
+    //&s //参照を返した後でsがdropされてしまう。参照は必ず有効な変数でないといけない
+    s      //参照ではなく所有権ごと返す。
+    //あるいはライフタイム指定子を使う
+}
 
 fn func(x : u8, y : u8){
     println!("x={}, y={}",x,y);
